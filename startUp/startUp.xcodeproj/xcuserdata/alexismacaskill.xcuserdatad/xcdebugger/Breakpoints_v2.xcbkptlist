@@ -10,13 +10,154 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "startUp/homePageViewController.swift"
-            timestampString = "562049188.863441"
+            timestampString = "563864230.118014"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
             endingLineNumber = "22"
             landmarkName = "homePageViewController"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "startUp.homePageViewController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; startUp.homePageViewController"
+                  moduleName = "startUp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/homePageViewController.swift"
+                  timestampString = "563860930.1644289"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "startUp.homePageViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; startUp.homePageViewController"
+                  moduleName = "startUp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/homePageViewController.swift"
+                  timestampString = "563860930.238904"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "78">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "startUp.homePageViewController.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;startUp.homePageViewController&gt;"
+                  moduleName = "startUp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/homePageViewController.swift"
+                  timestampString = "563860930.241949"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "startUp.homePageViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;startUp.homePageViewController&gt;"
+                  moduleName = "startUp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/homePageViewController.swift"
+                  timestampString = "563860930.245677"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "67">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "startUp.homePageViewController.__deallocating_deinit"
+                  moduleName = "startUp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/homePageViewController.swift"
+                  timestampString = "563860930.250831"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "startUp/viewFlowCollectionViewCell.swift"
+            timestampString = "563587711.7287771"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "scrollViewWillEndDragging(_:withVelocity:targetContentOffset:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "startUp/individualTableViewController.swift"
+            timestampString = "565075472.858296"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "galleryCells"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "startUp.galleryCells.init(style: __C.UITableViewCellStyle, reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; startUp.galleryCells"
+                  moduleName = "startUp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/individualTableViewController.swift"
+                  timestampString = "565032651.178142"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "57">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "startUp.galleryCells.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;startUp.galleryCells&gt;"
+                  moduleName = "startUp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/individualTableViewController.swift"
+                  timestampString = "565032651.180864"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "50">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
