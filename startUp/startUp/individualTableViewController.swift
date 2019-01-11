@@ -147,23 +147,44 @@ class individualTableViewController: UITableViewController {
     var location: String = ""
     var eventImage: String = ""
     var path  : IndexPath?
-   // let cellScaling: CGFloat = 0.6
+    var refreshBarButtonActivityIndicator: UIBarButtonItem!
+    
 
-  
+
+    @IBOutlet weak var refreshOutlet: UIBarButtonItem!
     
+    @IBAction func refreshButton(_ sender: UIBarButtonItem) {
+        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView.init(style: .gray)
+        refreshBarButtonActivityIndicator = UIBarButtonItem(customView: activityIndicator)
+        activityIndicator.startAnimating()
+        
+        self.navigationItem.rightBarButtonItem = refreshBarButtonActivityIndicator
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            self.navigationItem.rightBarButtonItem = self.refreshOutlet
+        }
+    }
     
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-        eventTitle.text = eventName;
-        dateTitle.text = location;
+        //update stuff from API
+        eventTitle.text = getName();
+        dateTitle.text = getDate();
         
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    func getDate() -> String {
+        //pull from API
+        return "Date - Date"
+    }
+    
+    func getName() -> String {
+        //Pull from API
+        return "Name"
+    }
+    
+    
+    
+    
     /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CuratedViewController" {

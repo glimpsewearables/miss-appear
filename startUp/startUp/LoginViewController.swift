@@ -26,25 +26,19 @@ class LoginViewController: UIViewController {
 
     
     func loginButton() {
-      //  LoginButtonOutlet.layer.borderColor = UIColor.whiteColor()
+        //makes the login button have an outline
         LoginButtonOutlet.layer.borderWidth = 1
+        //makes the login button have rounded edges.
         LoginButtonOutlet.layer.cornerRadius = 5
     }
     
     
     @IBAction func loginClicked(_ sender: UIButton) {
         //Sign in user
-        //If username and password is correct, take user to protected page
-        var myTabBar = self.storyboard?.instantiateViewController(withIdentifier: "myTabBar") as! UITabBarController
-        var appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = myTabBar
-        
-       // performSegue(withIdentifier: "goToHomeSegue", sender: self)
+        //If user typed in a valid device ID (check with API), take user to protected page
+       performSegue(withIdentifier: "toHome", sender: self)
     }
     
-    @IBAction func signUpClicked(_ sender: UIButton) {
-        performSegue(withIdentifier: "toRegisterSegue", sender: self)
-    }
     
 }
 
