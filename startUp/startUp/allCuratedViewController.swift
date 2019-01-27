@@ -22,6 +22,9 @@ class allCuratedViewController: UIPageViewController {
 
     var player: AVPlayer?
     
+    //ADDED:
+    var urls: [URL]? = [URL(string: "https://youtu.be/VGRF6eFdmXk")!, URL(string: "https://youtu.be/VGRF6eFdmXk")!, URL(string: "https://youtu.be/VGRF6eFdmXk")! ]
+    
     var images: [UIImage]? =  [UIImage(named: "lolla")!, UIImage(named: "cover")!, UIImage(named: "lolla")!, UIImage(named: "coachella")!, UIImage(named: "actualSize")! ]
     
     weak var pageViewControllerDelegate: allCuratedViewControllerDelegate?
@@ -33,12 +36,22 @@ class allCuratedViewController: UIPageViewController {
     lazy var controllers: [UIViewController] = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var controllers = [UIViewController]()
+        //ADDED:
+        if let urls = self.urls {
+            for url in urls {
+                let curatedUrlVC = storyboard.instantiateViewController(withIdentifier: Storyboard.curatedViewController)
+                controllers.append(curatedUrlVC)
+            }
+        }
+        /*
         if let images = self.images {
             for image in images {
                 let curatedImageVC = storyboard.instantiateViewController(withIdentifier: Storyboard.curatedViewController)
                 controllers.append(curatedImageVC)
             }
         }
+         */
+        
         self.pageViewControllerDelegate?.setupPageController(numberOfPages: controllers.count)
         
         return controllers
@@ -91,12 +104,27 @@ class allCuratedViewController: UIPageViewController {
     func configureDisplaying(viewController: UIViewController) {
         for (index, vc) in controllers.enumerated() {
             if viewController === vc {
-                if let curatedImageVC = viewController as? CuratedViewController {
-                   // curatedImageVC.player?.play()
-                    curatedImageVC.image = self.images?[index]
-                    //curatedImageVC.playerArea = self.images?[index]
+                //ADDED:
+                if let curatedUrlVC = viewController as? CuratedViewController {
+                    let playerLayer = AVPlayerLayer(player: AVPlayer(url : (self.urls?[index])!))
+                   // playerLayer.frame = curatedUrlVC.playerArea.frame
+                    curatedUrlVC.playerLayer.player = AVPlayer(url: (self.urls?[index])!)
+                    curatedUrlVC.playerLayer.player?.play()
+                    //layer.addSublayer(playerLayer)
+                  //  let player = AVPlayer(url: url)
+                //    player.actionAtItemEnd = .none
+               //     playerLayer.player = player
+               
+                  
                     self.pageViewControllerDelegate?.turnPageController(to: index)
                 }
+                
+                /*
+                if let curatedImageVC = viewController as? CuratedViewController {
+                      curatedImageVC.image = self.images?[index]
+                    self.pageViewControllerDelegate?.turnPageController(to: index)
+                }
+ */
             }
         }
         
