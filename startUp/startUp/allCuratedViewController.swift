@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 protocol allCuratedViewControllerDelegate: class
 {
@@ -15,6 +17,11 @@ protocol allCuratedViewControllerDelegate: class
 }
 
 class allCuratedViewController: UIPageViewController {
+   
+    
+
+    var player: AVPlayer?
+    
     var images: [UIImage]? =  [UIImage(named: "lolla")!, UIImage(named: "cover")!, UIImage(named: "lolla")!, UIImage(named: "coachella")!, UIImage(named: "actualSize")! ]
     
     weak var pageViewControllerDelegate: allCuratedViewControllerDelegate?
@@ -22,6 +29,7 @@ class allCuratedViewController: UIPageViewController {
     struct Storyboard {
         static let curatedViewController = "CuratedViewController"
     }
+    
     lazy var controllers: [UIViewController] = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var controllers = [UIViewController]()
@@ -35,6 +43,7 @@ class allCuratedViewController: UIPageViewController {
         
         return controllers
     }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +52,28 @@ class allCuratedViewController: UIPageViewController {
         dataSource = self
         delegate = self
         self.turnToPage(index: 0)
+        
+        
+        let url = URL(string: "https://youtu.be/VGRF6eFdmXk")
+        
+        
+        // Create an AVPlayer, passing it the HTTP Live Streaming URL.
+        let player = AVPlayer(url: url!)
+        
+        // Create a new AVPlayerViewController and pass it a reference to the player.
+        let controller = AVPlayerViewController()
+        controller.player = player
+        
+        // Modally present the player and call the player's play() method when complete.
+        present(controller, animated: true) {
+            player.play()
+        }
+        
+        
     }
     
     func turnToPage(index: Int ) {
+        
         
         let controller = controllers[index]
         var direction = UIPageViewController.NavigationDirection.forward
@@ -64,7 +92,9 @@ class allCuratedViewController: UIPageViewController {
         for (index, vc) in controllers.enumerated() {
             if viewController === vc {
                 if let curatedImageVC = viewController as? CuratedViewController {
+                   // curatedImageVC.player?.play()
                     curatedImageVC.image = self.images?[index]
+                    //curatedImageVC.playerArea = self.images?[index]
                     self.pageViewControllerDelegate?.turnPageController(to: index)
                 }
             }

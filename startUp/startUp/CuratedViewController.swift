@@ -7,10 +7,24 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class CuratedViewController: UIViewController {
 
+    @IBOutlet var playerArea: UIView!
     @IBOutlet weak var imageView: UIImageView!
+     var player: AVPlayer?
+    
+   
+    
+    
+    // Create a new AVPlayerViewController and pass it a reference to the player.
+   // let controller = AVPlayerViewController()
+  //  controller.player = player
+ 
+    
+ 
     var image: UIImage? {
         didSet {
             self.imageView?.image = image
@@ -20,6 +34,15 @@ class CuratedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.imageView.image = image
+        let url = URL(string: "https://youtu.be/VGRF6eFdmXk")
+        
+        
+        // Create an AVPlayer, passing it the HTTP Live Streaming URL.
+        let player = AVPlayer(url: url!)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = playerArea.frame
+        playerArea.layer.addSublayer(playerLayer)
+        
     }
     /*
     // MARK: - Navigation

@@ -120,7 +120,6 @@ class galleryCells: UITableViewCell {
     }
     
      @IBOutlet weak var rightOutlet: UIButton!
-    @IBOutlet weak var middleOutlet: UIButton!
     
     @IBOutlet weak var leftOutlet: UIButton!
     
@@ -294,8 +293,7 @@ class individualTableViewController: UITableViewController {
             cell.leftOutlet.setImage(UIImage(named: images[Int.random(in: 0 ..< images.count - 1)]), for: UIControl.State.normal)
             cell.leftOutlet.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
             
-            cell.middleOutlet.setImage(UIImage(named: images[Int.random(in: 0 ..< images.count - 1)]), for: UIControl.State.normal)
-            cell.middleOutlet.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
+        
            
             cell.rightOutlet.setImage(UIImage(named: images[Int.random(in: 0 ..< images.count - 1)]), for: UIControl.State.normal)
             cell.rightOutlet.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
@@ -319,14 +317,7 @@ class individualTableViewController: UITableViewController {
             //let cell = tableView.cellForRow(at: path!) as! galleryCells
             //vc?.theImage = (cell.rightOutlet.imageView?.image)!
         }
-        if segue.identifier == "middleToBig" {
-            //if segue.destination is bigPictureViewController {
-            let vc = segue.destination as? bigPictureViewController
-            // let aGalleryCell = galleryCells()
-            // vc?.theImage =  aGalleryCell.getImage()
-            //let cell = tableView.cellForRow(at: path!) as! galleryCells
-          //  vc?.theImage = (cell.middleOutlet.imageView?.image)!
-        }
+
         if segue.identifier == "leftToBig" {
             //if segue.destination is bigPictureViewController {
             let vc = segue.destination as? bigPictureViewController
