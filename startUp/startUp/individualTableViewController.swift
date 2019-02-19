@@ -18,6 +18,7 @@ class titleCell: UITableViewCell {
 }
 
 class galleryCells: UITableViewCell {
+    /*
     var video: Video? {
         didSet {
             thumbnailImageView.image = getThumbnailImage(forUrl: URL(string: (video?.link)!)!)
@@ -70,7 +71,7 @@ class galleryCells: UITableViewCell {
         return nil
     }
     
-
+*/
  //  var clickedImage = UIImage(named: "cover")
    // var clickedAway = false
     @IBAction func rightButtonClicked(_ sender: Any) {
@@ -84,6 +85,7 @@ class galleryCells: UITableViewCell {
     @IBOutlet weak var leftOutlet: UIButton!
     
 
+    @IBOutlet weak var middleOutlet: UIButton!
     
 }
 
@@ -141,7 +143,7 @@ class individualTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         //return images.count + 2
-        return videos.count + 1
+        return ((videos.count/3) + 1)
         
     }
 
@@ -168,49 +170,47 @@ class individualTableViewController: UITableViewController {
             
            // let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "galleryCells")
             let cell = tableView.dequeueReusableCell(withIdentifier: "galleryCell", for: indexPath) as! galleryCells
-           let video = videos[indexPath.section - 1]
-            var image = createThumbnailOfVideoFromRemoteUrl(url: video.link!)
-            cell.leftOutlet.setImage(image, for: [])
+           let videoleft = videos[(indexPath.section*3) - 1]
+            let videoright = videos[(indexPath.section*3) + 1]
+            let videomiddle = videos[(indexPath.section*3)]
             
-
-            cell.textLabel?.text = video.link//video[0].link
-            
-            //let cell = tableView.dequeueReusableCell(withIdentifier: "galleryCell", for: indexPath) as! galleryCells
-            
-            //cell.leftOutlet.setImage(UIImage(named: images[Int.random(in: 0 ..< images.count - 1)]), for: UIControl.State.normal)
-           // cell.leftOutlet.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
-            
-            //cell.leftOutlet.setImage(createThumbnailOfVideoFromRemoteUrl(url: cell.video[0]), for: UIControl.State.normal)
-        
-      
-           
-          //  cell.rightOutletcd.setImage(UIImage(named: images[Int.random(in: 0 ..< images.count - 1)]), for: UIControl.State.normal)
-           // cell.rightOutlet.imageView?.contentMode = UIView.ContentMode.scaleAspectFill
-            //path = tableView.indexPathForSelectedRow
-            path = indexPath.row
+            var imageleft = createThumbnailOfVideoFromRemoteUrl(url: videoleft.link!)
+            var imageright = createThumbnailOfVideoFromRemoteUrl(url: videoright.link!)
+            var imagemiddle = createThumbnailOfVideoFromRemoteUrl(url: videomiddle.link!)
+            cell.leftOutlet.setImage(imageleft, for: [])
+            cell.rightOutlet.setImage(imageright, for: [])
+            cell.middleOutlet.setImage(imagemiddle, for: [])
+            path = indexPath.section - 1
             return cell
         }
-       
-
-        //return cell
+    }
+    /*
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("User tapped on item \(indexPath.section)")
+        path = indexPath.section - 1
     }
   
-    
-    
+    */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+      
     
         // Get the new view controller using segue.destination.
         if segue.identifier == "rightToBig" {
             let vc = segue.destination as? bigPictureViewController
-            vc?.videoLink = videos[path! + 2].link
+            vc?.videoLink = videos[(path! * 3) + 2].link
            
         }
 
         if segue.identifier == "leftToBig" {
       
             let vc = segue.destination as? bigPictureViewController
-            vc?.videoLink = videos[path!].link
+            vc?.videoLink = videos[(path! * 3)].link
+        }
+        
+        if segue.identifier == "middleToBig" {
+            
+            let vc = segue.destination as? bigPictureViewController
+            vc?.videoLink = videos[(path! * 3) + 1].link
         }
         
     }

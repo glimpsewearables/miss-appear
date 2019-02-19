@@ -201,16 +201,33 @@
                                                 <segue destination="UcD-IS-yfv" kind="show" identifier="rightToBig" id="FGI-wf-2YX"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaK-Pa-TF9" userLabel="Middle Button">
+                                            <rect key="frame" x="125" y="0.0" width="125" height="94"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="HaK-Pa-TF9" secondAttribute="height" multiplier="4:3" id="LUo-Vi-ffn"/>
+                                                <constraint firstAttribute="width" constant="125" id="phC-gG-UPv"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="rightButtonClicked:" destination="GRB-Ym-NH3" eventType="touchUpInside" id="IqC-fd-sId"/>
+                                                <segue destination="UcD-IS-yfv" kind="show" identifier="middleToBig" id="d99-1J-Dtc"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="HaK-Pa-TF9" firstAttribute="top" secondItem="cP5-O4-GPk" secondAttribute="top" id="1r2-3z-iBQ"/>
                                         <constraint firstItem="evC-Nu-TQ2" firstAttribute="top" secondItem="cP5-O4-GPk" secondAttribute="top" id="3Av-en-SNC"/>
                                         <constraint firstItem="KcE-1K-6zO" firstAttribute="leading" secondItem="cP5-O4-GPk" secondAttribute="leading" id="CTm-qB-0bP"/>
+                                        <constraint firstItem="HaK-Pa-TF9" firstAttribute="width" secondItem="HaK-Pa-TF9" secondAttribute="height" multiplier="4:3" id="LGR-Ys-gzN"/>
+                                        <constraint firstItem="HaK-Pa-TF9" firstAttribute="leading" secondItem="KcE-1K-6zO" secondAttribute="trailing" id="aPL-XC-xa7"/>
+                                        <constraint firstItem="evC-Nu-TQ2" firstAttribute="leading" secondItem="HaK-Pa-TF9" secondAttribute="trailing" id="cYQ-Q6-wWq"/>
                                         <constraint firstAttribute="trailing" secondItem="evC-Nu-TQ2" secondAttribute="trailing" id="iev-xB-d31"/>
                                         <constraint firstItem="KcE-1K-6zO" firstAttribute="top" secondItem="cP5-O4-GPk" secondAttribute="top" id="mJW-JO-C0e"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="leftOutlet" destination="KcE-1K-6zO" id="YDh-dA-QhQ"/>
+                                    <outlet property="middleOutlet" destination="HaK-Pa-TF9" id="OCw-wF-GpF"/>
                                     <outlet property="rightOutlet" destination="evC-Nu-TQ2" id="KBX-Ym-1eN"/>
                                 </connections>
                             </tableViewCell>
@@ -396,6 +413,6 @@
         <image name="coachella" width="940" height="627"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FGI-wf-2YX"/>
+        <segue reference="d99-1J-Dtc"/>
     </inferredMetricsTieBreakers>
 </document>
