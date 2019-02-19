@@ -118,6 +118,8 @@ class EventsTableViewController: UITableViewController {
             vc?.eventName =  events[indexPath!.section].name
             vc?.location = events[indexPath!.section].address!
             vc?.eventImage = events[indexPath!.section].headerImage!
+            vc?.eventId = events[indexPath!.section].eventId! + 1
+            print("eventID", events[indexPath!.section].eventId)
         }
     }
     

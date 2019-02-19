@@ -18,12 +18,13 @@ protocol allCuratedViewControllerDelegate: class
 
 class allCuratedViewController: UIPageViewController {
    
-    
+    var curatedVideos: [Video]? = []
 
-    var player: AVPlayer?
+   // var player: AVPlayer?
     
     //ADDED:
-    var urls: [URL]? = [URL(string: "https://youtu.be/VGRF6eFdmXk")!, URL(string: "https://youtu.be/VGRF6eFdmXk")!, URL(string: "https://youtu.be/VGRF6eFdmXk")! ]
+    //var urls: [URL]? = [URL(string: "https://youtu.be/VGRF6eFdmXk")!, URL(string: "https://youtu.be/VGRF6eFdmXk")!, URL(string: "https://youtu.be/VGRF6eFdmXk")! ]
+    var eventId : Int!
     
     var images: [UIImage]? =  [UIImage(named: "lolla")!, UIImage(named: "cover")!, UIImage(named: "lolla")!, UIImage(named: "coachella")!, UIImage(named: "actualSize")! ]
     
@@ -36,11 +37,21 @@ class allCuratedViewController: UIPageViewController {
     lazy var controllers: [UIViewController] = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var controllers = [UIViewController]()
+         /*
         //ADDED:
         if let urls = self.urls {
             for url in urls {
                 let curatedUrlVC = storyboard.instantiateViewController(withIdentifier: Storyboard.curatedViewController)
                 controllers.append(curatedUrlVC)
+            }
+        }
+         */
+       
+        
+        if let curatedVideos = self.curatedVideos {
+            for video in curatedVideos {
+                let curatedImageVC = storyboard.instantiateViewController(withIdentifier: Storyboard.curatedViewController)
+                controllers.append(curatedImageVC)
             }
         }
         /*
@@ -53,7 +64,7 @@ class allCuratedViewController: UIPageViewController {
          */
         
         self.pageViewControllerDelegate?.setupPageController(numberOfPages: controllers.count)
-        
+        print("controller Count: ", controllers.count)
         return controllers
     }()
 
@@ -64,6 +75,7 @@ class allCuratedViewController: UIPageViewController {
         automaticallyAdjustsScrollViewInsets = false
         dataSource = self
         delegate = self
+        fetchMedia()
         self.turnToPage(index: 0)
         
         
@@ -87,7 +99,7 @@ class allCuratedViewController: UIPageViewController {
     
     func turnToPage(index: Int ) {
         
-        
+        if (controllers.count > 0){
         let controller = controllers[index]
         var direction = UIPageViewController.NavigationDirection.forward
         if let currentVC = viewControllers?.first {
@@ -99,12 +111,31 @@ class allCuratedViewController: UIPageViewController {
         self.configureDisplaying(viewController: controller)
         
         setViewControllers([controller], direction: direction, animated: true, completion: nil)
-        
+        }
     }
+    
+    func createThumbnailOfVideoFromRemoteUrl(url: String) -> UIImage? {
+        let asset = AVAsset(url: URL(string: url)!)
+        let assetImgGenerate = AVAssetImageGenerator(asset: asset)
+        assetImgGenerate.appliesPreferredTrackTransform = true
+        //Can set this to improve performance if target size is known before hand
+        //assetImgGenerate.maximumSize = CGSize(width,height)
+        let time = CMTimeMakeWithSeconds(1.0, preferredTimescale: 600)
+        do {
+            let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+            let thumbnail = UIImage(cgImage: img)
+            return thumbnail
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
     func configureDisplaying(viewController: UIViewController) {
         for (index, vc) in controllers.enumerated() {
             if viewController === vc {
                 //ADDED:
+                /*
                 if let curatedUrlVC = viewController as? CuratedViewController {
                     let playerLayer = AVPlayerLayer(player: AVPlayer(url : (self.urls?[index])!))
                    // playerLayer.frame = curatedUrlVC.playerArea.frame
@@ -118,13 +149,14 @@ class allCuratedViewController: UIPageViewController {
                   
                     self.pageViewControllerDelegate?.turnPageController(to: index)
                 }
+ */
                 
-                /*
+                
                 if let curatedImageVC = viewController as? CuratedViewController {
-                      curatedImageVC.image = self.images?[index]
+                    curatedImageVC.imageView = UIImageView(image: createThumbnailOfVideoFromRemoteUrl(url: (self.curatedVideos?[index].link!)!))
                     self.pageViewControllerDelegate?.turnPageController(to: index)
                 }
- */
+ 
             }
         }
         
@@ -180,4 +212,42 @@ extension allCuratedViewController : UIPageViewControllerDelegate {
             self.configureDisplaying(viewController: previousViewControllers.first as! CuratedViewController)
         }
     }
+    
+    
+    fileprivate func fetchMedia() {
+      //  let id: String = String(eventId)
+      //  let urlString = "https://api.glimpsewearables.com/media/getAllVideosUserEvent/1/\(id)"
+        let urlString = "https://api.glimpsewearables.com/media/getAllVideosUserEvent/1/2"
+        print(urlString)
+        guard let url = URL(string: urlString) else {return}
+        URLSession.shared.dataTask(with: url) { (data, _, err) in
+            /*
+             guard let path = Bundle.main.path(forResource: "user1event1", ofType: "json") else { return }
+             let url = URL(fileURLWithPath: path)
+             URLSession.shared.dataTask(with: url) { (data, _, err) in
+             */
+            if let err = err {
+                print("failed to get data from url", err)
+                return
+            }
+            
+            guard let data = data else {return}
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let json = try decoder.decode(VideoJson.self, from: data)
+                let userEvent = json.userEventVideos
+                self.curatedVideos = userEvent.rawMedia!
+                //self.tableView.reloadData()
+            } catch let jsonErr {
+                print("Failed to decode: ", jsonErr)
+            }
+           
+            print("Parsed Media Properly")
+            }.resume()
+    }
+    
+    
+    
 }

@@ -96,7 +96,7 @@ class individualTableViewController: UITableViewController {
     var eventImage: String = ""
     var path  : Int?
     var refreshBarButtonActivityIndicator: UIBarButtonItem!
-    
+    var timer: Timer!
 
 
     @IBOutlet weak var refreshOutlet: UIBarButtonItem!
@@ -109,16 +109,20 @@ class individualTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = refreshBarButtonActivityIndicator
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             self.navigationItem.rightBarButtonItem = self.refreshOutlet
-        }
+        
     }
-    
+        fetchMedia()
+    }
+
+   
  
     override func viewDidLoad() {
         super.viewDidLoad()
         //update stuff from API
         fetchMedia()
         eventTitle.text = eventName;
-        dateTitle.text = "date";
+        navigationItem.title = eventName
+        dateTitle.text = location;
         tableView.register(galleryCells.self, forCellReuseIdentifier: "cellId")
         
     }
@@ -137,7 +141,7 @@ class individualTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         //return images.count + 2
-        return videos.count + 2
+        return videos.count + 1
         
     }
 
@@ -158,22 +162,16 @@ class individualTableViewController: UITableViewController {
         if (indexPath.section == 0 ) {
       
             let cell = tableView.dequeueReusableCell(withIdentifier: "plain", for: indexPath) as! titleCell
-            
-          //  if (eventImage == "lolla") {
-            //    cell.image2.image = UIImage(named: "cover")
-         //   } else {
-                //cell.image2.image = UIImage(named: eventImage)
-          //  }
-            
-            //cell.image2.contentMode = .scaleAspectFill
             return cell
 
         }else {
             
            // let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "galleryCells")
             let cell = tableView.dequeueReusableCell(withIdentifier: "galleryCell", for: indexPath) as! galleryCells
-            let video = videos[0]
-            //let video = [videos[(indexPath.row  - 2 ) / 3], videos[(indexPath.row - 2) / 3 + 1], videos[((indexPath.row - 2) / 3 )+ 2]]
+           let video = videos[indexPath.section - 1]
+            var image = createThumbnailOfVideoFromRemoteUrl(url: video.link!)
+            cell.leftOutlet.setImage(image, for: [])
+            
 
             cell.textLabel?.text = video.link//video[0].link
             
@@ -206,6 +204,7 @@ class individualTableViewController: UITableViewController {
         if segue.identifier == "rightToBig" {
             let vc = segue.destination as? bigPictureViewController
             vc?.videoLink = videos[path! + 2].link
+           
         }
 
         if segue.identifier == "leftToBig" {
@@ -218,9 +217,9 @@ class individualTableViewController: UITableViewController {
     
 
     fileprivate func fetchMedia() {
-        //let id: String = String(eventId)
-       // let urlString = "https://api.glimpsewearables.com/media/getAllVideosUserEvent/1/\(id)"
-        let urlString = "https://api.glimpsewearables.com/media/getAllVideosUserEvent/1/2"
+        let id: String = String(eventId)
+        let urlString = "https://api.glimpsewearables.com/media/getAllVideosUserEvent/1/\(id)"
+        //let urlString = "https://api.glimpsewearables.com/media/getAllVideosUserEvent/1/2"
         print(urlString)
         guard let url = URL(string: urlString) else {return}
         URLSession.shared.dataTask(with: url) { (data, _, err) in

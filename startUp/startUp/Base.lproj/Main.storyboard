@@ -90,7 +90,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lO1-Y5-evO" customClass="allCuratedViewController" customModule="startUp" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N8m-SM-2Cp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2680.8000000000002" y="-1216.6416791604199"/>
+            <point key="canvasLocation" x="1102" y="-694"/>
         </scene>
         <!-- -->
         <scene sceneID="ktu-Tx-Qea">
@@ -152,12 +152,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNF-GS-hU5">
-                                            <rect key="frame" x="3" y="19" width="191.5" height="22.5"/>
+                                            <rect key="frame" x="3" y="19" width="189" height="22.5"/>
                                             <attributedString key="attributedText">
-                                                <fragment content="Photos From Glamp">
+                                                <fragment content="Videos From Glamp">
                                                     <attributes>
                                                         <color key="NSColor" white="0.0" alpha="0.26599957191780821" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <font key="NSFont" size="20" name="Arial-BoldMT"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
                                             </attributedString>

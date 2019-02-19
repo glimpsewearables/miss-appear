@@ -11,7 +11,8 @@ import AVKit
 import AVFoundation
 
 class CuratedViewController: UIViewController {
-
+    var videoLink : String?
+    
     @IBOutlet var playerArea: UIView!
     @IBOutlet weak var imageView: UIImageView!
   
@@ -31,12 +32,12 @@ class CuratedViewController: UIViewController {
      
         }
  */
-    let playerLayer = AVPlayerLayer()
-    var player: AVPlayer {
-        return playerLayer.player!
-    }
-    /*
     
+    /*
+     let playerLayer = AVPlayerLayer()
+     var player: AVPlayer {
+     return playerLayer.player!
+     }
     var videoLayer: AVPlayerLayer? {
         didSet {
             
@@ -48,7 +49,7 @@ class CuratedViewController: UIViewController {
         }
     }
  */
-    
+    /*
     func setUpPlayerLayer() {
         playerLayer.frame = playerArea.bounds
         let url = URL(string: "https://youtu.be/VGRF6eFdmXk")
@@ -58,20 +59,29 @@ class CuratedViewController: UIViewController {
         player.actionAtItemEnd = .none
         playerLayer.player = player
     }
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
        // self.imageView.image = image
         //self.playerArea?.layer.addSublayer(videoLayer!)
        // let url = URL(string: "https://youtu.be/VGRF6eFdmXk")
-        setUpPlayerLayer()
-        playerArea.layer.addSublayer(playerLayer)
+      //  setUpPlayerLayer()
+      //  playerArea.layer.addSublayer(playerLayer)
         
         // Create an AVPlayer, passing it the HTTP Live Streaming URL.
   // let player = AVPlayer(url: url!)
     //    let playerLayer = AVPlayerLayer(player: player)
       //  playerLayer.frame = playerArea.frame
        // playerArea.layer.addSublayer(playerLayer)
+        
+        super.viewDidLoad()
+        let videoURL = URL(string: videoLink!)
+        let player = AVPlayer(url: videoURL!)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.bounds
+        self.view.layer.addSublayer(playerLayer)
+        player.play()
+        
         
     }
 
