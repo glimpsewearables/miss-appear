@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		460E2B4A21599342007C9C2D /* RegisterNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460E2B4921599342007C9C2D /* RegisterNewViewController.swift */; };
 		460EA549219BB215004433DB /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460EA548219BB215004433DB /* HeaderView.swift */; };
+		461BC20A221A2C7B0059CFB0 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461BC209221A2C7B0059CFB0 /* Event.swift */; };
+		461BC20C221A2C990059CFB0 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461BC20B221A2C990059CFB0 /* Video.swift */; };
+		461BC20E221A31590059CFB0 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461BC20D221A31590059CFB0 /* VideoCell.swift */; };
 		462C35D92176DEAF00068A1C /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462C35D82176DEAF00068A1C /* EventsTableViewController.swift */; };
 		4660337F21AE189B004BD1B7 /* bigPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4660337E21AE189B004BD1B7 /* bigPictureViewController.swift */; };
 		46C50F2D2197CF0800BE1826 /* CuratedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C50F2C2197CF0800BE1826 /* CuratedViewController.swift */; };
@@ -35,6 +38,9 @@
 /* Begin PBXFileReference section */
 		460E2B4921599342007C9C2D /* RegisterNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNewViewController.swift; sourceTree = "<group>"; };
 		460EA548219BB215004433DB /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		461BC209221A2C7B0059CFB0 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		461BC20B221A2C990059CFB0 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		461BC20D221A31590059CFB0 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		462C35D82176DEAF00068A1C /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
 		4660337E21AE189B004BD1B7 /* bigPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bigPictureViewController.swift; sourceTree = "<group>"; };
 		46C50F2C2197CF0800BE1826 /* CuratedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuratedViewController.swift; sourceTree = "<group>"; };
@@ -70,9 +76,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		461BC208221A2C450059CFB0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				461BC209221A2C7B0059CFB0 /* Event.swift */,
+				461BC20B221A2C990059CFB0 /* Video.swift */,
+				461BC20D221A31590059CFB0 /* VideoCell.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		46DD43F12137C03A0022D024 = {
 			isa = PBXGroup;
 			children = (
+				461BC208221A2C450059CFB0 /* Models */,
 				46DD43FC2137C03A0022D024 /* startUp */,
 				46DD44112137C03C0022D024 /* startUpTests */,
 				46DD43FB2137C03A0022D024 /* Products */,
@@ -224,8 +241,11 @@
 				46C50F2F2197D04600BE1826 /* allCuratedViewController.swift in Sources */,
 				46DD44002137C03A0022D024 /* LoginViewController.swift in Sources */,
 				46E1F67F218950B000CE650B /* individualTableViewController.swift in Sources */,
+				461BC20A221A2C7B0059CFB0 /* Event.swift in Sources */,
+				461BC20E221A31590059CFB0 /* VideoCell.swift in Sources */,
 				460E2B4A21599342007C9C2D /* RegisterNewViewController.swift in Sources */,
 				462C35D92176DEAF00068A1C /* EventsTableViewController.swift in Sources */,
+				461BC20C221A2C990059CFB0 /* Video.swift in Sources */,
 				4660337F21AE189B004BD1B7 /* bigPictureViewController.swift in Sources */,
 				46DD43FE2137C03A0022D024 /* AppDelegate.swift in Sources */,
 				46C50F2D2197CF0800BE1826 /* CuratedViewController.swift in Sources */,

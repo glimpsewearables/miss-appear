@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginClicked(_ sender: UIButton) {
         //Sign in user
         //If user typed in a valid device ID (check with API), take user to protected page
-       performSegue(withIdentifier: "toHome", sender: self)
+       performSegue(withIdentifier: "toEvents", sender: self)
     }
     
     

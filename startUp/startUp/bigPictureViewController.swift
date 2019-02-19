@@ -7,14 +7,24 @@
 //
 
 import UIKit
+import Foundation
+import AVKit
+import AVFoundation
 
 class bigPictureViewController: UIViewController {
     var theImage : UIImage = UIImage(named: "cover")!
+    var videoLink : String?
     
     @IBOutlet weak var pictureOutlet: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         pictureOutlet.image = theImage
+        let videoURL = URL(string: videoLink!)
+        let player = AVPlayer(url: videoURL!)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.bounds
+        self.view.layer.addSublayer(playerLayer)
+        player.play()
         
         // Do any additional setup after loading the view.
     }
