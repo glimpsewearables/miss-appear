@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 struct EventDescription {
     
@@ -16,6 +17,7 @@ struct EventDescription {
     var image : String
     
 }
+
 
 class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var eventNameLabel: UILabel!
@@ -27,24 +29,23 @@ class EventsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        navigationItem.title = "Events"
+        fetchMedia()
+        tableView.backgroundColor = UIColor.white
+        //tableView.register(EventCell.self, forCellReuseIdentifier: "cellId")
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    var events = [Event]() //array of media data
+    var meta = [Meta]() //meta data
+    /*
     var events = [
         EventDescription(id: 1, name: "Lollapalooza", location: "August 1st-3rd", image: "lolla"),
         EventDescription(id: 2, name: "Bumpershoot", location: "Sept 1st-3rd", image: "bumpershoot"),
         EventDescription(id: 3, name: "Coachella", location: "May 24-27th", image: "coachella"),
         ]
-    
+    */
     // MARK: - Table view data source
    
-    // by default the tables have 1 section. This method isn't used right now
     override func numberOfSections(in tableView: UITableView) -> Int {
         return events.count
     }
@@ -71,17 +72,28 @@ class EventsTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+       // let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellID")
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! EventTableViewCell
     
-       // cell.textLabel?.text = events[indexPath.row].name
         let event = events[indexPath.section]
         //let event = events[indexPath.row]
         cell.eventNameLabel?.text = event.name
         //height of rounded image.
         self.tableView.rowHeight = 270;
         self.tableView.separatorColor = UIColor.white;
-        cell.eventLocationLabel?.text = event.location
-        cell.eventImageView?.image = UIImage(named: event.image)
+        cell.eventLocationLabel?.text = event.address
+        
+        let url = URL(string: event.headerImage!)
+        let data = try? Data(contentsOf: url!)
+        
+        if let imageData = data {
+            let image = UIImage(data: imageData)
+            cell.eventImageView?.image = image
+        }
+        
         //centers the images in the middle of the rectangle and scales to fill
         cell.eventImageView?.contentMode = .scaleAspectFill
         //to make the images rounded.
@@ -92,70 +104,7 @@ class EventsTableViewController: UITableViewController {
         return cell
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-
-    
-    
-   /*
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //getting the index path of selected row
-        let indexPath = tableView.indexPathForSelectedRow
-        
-        //getting the current cell from the index path
-        let currentCell = tableView.cellForRow(at: indexPath!)! as UITableViewCell
-        
-        //getting the text of that cell
-        let currentItem = currentCell.textLabel!.text
-
-    }
  
- */
-    
-    
-  //  override func tableView(_tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-  //  }
-
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -167,8 +116,42 @@ class EventsTableViewController: UITableViewController {
         if segue.destination is individualTableViewController {
             let vc = segue.destination as? individualTableViewController
             vc?.eventName =  events[indexPath!.section].name
-            vc?.location = events[indexPath!.section].location
-            vc?.eventImage = events[indexPath!.section].image
+            vc?.location = events[indexPath!.section].address!
+            vc?.eventImage = events[indexPath!.section].headerImage!
+            vc?.eventId = events[indexPath!.section].eventId! + 1
+            print("eventID", events[indexPath!.section].eventId)
         }
+    }
+    
+    fileprivate func fetchMedia() {
+        let urlString = "https://api.glimpsewearables.com/api/event/"
+        guard let url = URL(string: urlString) else {return}
+        URLSession.shared.dataTask(with: url) { (data, _, err) in
+            /*
+             guard let path = Bundle.main.path(forResource: "events", ofType: "json") else { return }
+             let url = URL(fileURLWithPath: path)
+             URLSession.shared.dataTask(with: url) { (data, _, err) in */
+            if let err = err {
+                print("failed to get data from url", err)
+                return
+            }
+            
+            guard let data = data else {return}
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let json = try decoder.decode(EventJson.self, from: data)
+                self.meta = [json.meta!]
+                self.events = json.objects!
+                self.tableView.reloadData()
+            } catch let jsonErr {
+                print("Failed to decode: ", jsonErr)
+            }
+            print(self.meta)
+            print(self.events)
+            print(self.events.count)
+            print("Parsed Events Properly")
+            }.resume()
     }
 }

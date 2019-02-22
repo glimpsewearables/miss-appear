@@ -112,53 +112,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "startUp/individualTableViewController.swift"
-            timestampString = "568854516.716273"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "galleryCells"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "startUp.galleryCells.init(style: __C.UITableViewCellStyle, reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; startUp.galleryCells"
-                  moduleName = "startUp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/individualTableViewController.swift"
-                  timestampString = "565032651.178142"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "57">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "startUp.galleryCells.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;startUp.galleryCells&gt;"
-                  moduleName = "startUp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexismacaskill/Desktop/practiceXcode/GlimpseCamWebapp/mobile/ios/startUp/startUp/individualTableViewController.swift"
-                  timestampString = "565032651.180864"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "50">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
